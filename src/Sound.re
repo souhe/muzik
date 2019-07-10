@@ -1,17 +1,17 @@
 [@react.component]
-let make = () => {
+let make = (~freq: float=420., ~delay: float=0.) => {
   React.useEffect(() => {
     open Audio;
     let audioContext = make(~options=None);
     let oscillator = createOsc(audioContext);
-    let dest = audioContext->destinationGet;
-    let amp = createAmp(audioContext);
-    oscillator->connect(amp)->connect(dest);
+    let destination = audioContext->destinationGet;
 
-    let currentTime: float = audioContext->currentTimeGet;
-    (oscillator |> freq)->setValue(330., currentTime +. 3.5);
-    oscillator->start(0.);
+    oscillator->frequency->setValueAtTime(freq, 0.);
+    oscillator->connect(destination);
+    oscillator->start(delay);
+
     Some(() => oscillator->stop(0.));
   });
+
   ReasonReact.null;
 };

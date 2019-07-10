@@ -5,7 +5,8 @@ module AudioNode = {
 module AudioParam = {
   type audio_param;
   [@bs.send]
-  external setValue: (audio_param, float, float) => unit = "setValueAtTime";
+  external setValueAtTime: (audio_param, float, float) => unit =
+    "setValueAtTime";
 };
 
 module AudioSourceNode = {
@@ -16,7 +17,8 @@ module AudioSourceNode = {
 
 module OscillatorNode = {
   include AudioSourceNode;
-  [@bs.get] external freq: audio_node => AudioParam.audio_param = "frequency";
+  [@bs.get]
+  external frequency: audio_node => AudioParam.audio_param = "frequency";
 };
 
 [@bs.deriving abstract]
@@ -50,5 +52,5 @@ let make = (~options) => _make(options);
 
 let start = AudioSourceNode.start;
 let stop = AudioSourceNode.stop;
-let freq = OscillatorNode.freq;
-let setValue = AudioParam.setValue;
+let frequency = OscillatorNode.frequency;
+let setValueAtTime = AudioParam.setValueAtTime;
