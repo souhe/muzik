@@ -14,17 +14,31 @@ let make = () => {
       {isPlaying: false},
     );
 
-  <>
+  <TempoProvider value={tempo: 120.}>
     <div> {ReasonReact.string("Muzik")} </div>
     <button onClick={_ => dispatch(TogglePlay)}>
       {ReasonReact.string("Play/Stop")}
     </button>
     {state.isPlaying
        ? <>
-           <Sound freq=300. />
-           <Sound freq=320. delay=1. />
-           <Sound freq=340. delay=3. />
+           <Note freq={Note(`a3)} duration=Quarter />
+           <Note freq={Note(`h3)} delay=Quarter duration=Quarter />
+           <Note freq={Note(`c4)} delay=Quarter duration=Quarter />
+           <Note freq={Note(`c3)} delay=Quarter duration=Quarter />
+           <Note freq={Note(`e3)} delay=Quarter duration=Quarter />
          </>
        : ReasonReact.null}
-  </>;
+  </TempoProvider>;
+  // <Loop tempo=100. duration=4. playing={state.isPlaying}>
+  //   {({clock}) =>
+  //      <>
+  //        <Delay clock duration=`quarter>
+  //          <Note freq=`c />
+  //          <Note freq=`e />
+  //        </Delay>
+  //        <Delay clock delay=`half duration=`sixteen>
+  //          <Note freq=`g />
+  //        </Delay>
+  //      </>}
+  // </Loop>
 };

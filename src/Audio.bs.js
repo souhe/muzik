@@ -24,11 +24,11 @@ function stop(prim, prim$1) {
   return /* () */0;
 }
 
-function freq(prim) {
+function frequency(prim) {
   return prim.frequency;
 }
 
-function setValue(prim, prim$1, prim$2) {
+function setValueAtTime(prim, prim$1, prim$2) {
   prim.setValueAtTime(prim$1, prim$2);
   return /* () */0;
 }
@@ -40,6 +40,6 @@ exports.$$OscillatorNode = $$OscillatorNode;
 exports.make = make;
 exports.start = start;
 exports.stop = stop;
-exports.freq = freq;
-exports.setValue = setValue;
+exports.frequency = frequency;
+exports.setValueAtTime = setValueAtTime;
 /* No side effect */

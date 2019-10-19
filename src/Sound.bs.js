@@ -5,15 +5,20 @@ var React = require("react");
 var Audio$ReactHooksTemplate = require("./Audio.bs.js");
 
 function Sound(Props) {
+  var match = Props.freq;
+  var freq = match !== undefined ? match : 420;
+  var match$1 = Props.delay;
+  var delay = match$1 !== undefined ? match$1 : 0;
+  var match$2 = Props.duration;
+  var duration = match$2 !== undefined ? match$2 : 1;
   React.useEffect((function () {
           var audioContext = Audio$ReactHooksTemplate.make(undefined);
           var oscillator = new window.OscillatorNode(audioContext);
-          var dest = audioContext.destination;
-          var amp = new window.GainNode(audioContext);
-          oscillator.connect(amp).connect(dest);
-          var currentTime = audioContext.currentTime;
-          Audio$ReactHooksTemplate.setValue(Audio$ReactHooksTemplate.freq(oscillator), 330, currentTime + 3.5);
-          Audio$ReactHooksTemplate.start(oscillator, 0);
+          var destination = audioContext.destination;
+          Audio$ReactHooksTemplate.setValueAtTime(Audio$ReactHooksTemplate.frequency(oscillator), freq, 0);
+          oscillator.connect(destination);
+          Audio$ReactHooksTemplate.start(oscillator, delay);
+          Audio$ReactHooksTemplate.stop(oscillator, duration + delay);
           return (function (param) {
                     return Audio$ReactHooksTemplate.stop(oscillator, 0);
                   });
